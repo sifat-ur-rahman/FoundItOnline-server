@@ -1,41 +1,35 @@
 import { Prisma } from "@prisma/client";
 import prisma from "../../../shared/prisma";
+import { ItemStatus, UserStatus } from "../../../../prisma/generated/client";
 
 const createReportIntoBD = async (user: any, payload: any) => {
   const userId = user.userId;
-  const { categoryId, foundItemName, description, location } = payload;
+  const {
+    category,
+    description,
+    dateFound,
+    locationFound,
+    contactPhone,
+    contactEmail,
+    images,
+  } = payload;
 
   // Create the found item
-  const foundItems = await prisma.foundItem.create({
+  const foundItem = await prisma.foundItem.create({
     data: {
-      userId,
-      categoryId,
-      foundItemName,
+      category,
       description,
-      location,
-    },
-    include: {
-      user: {
-        select: {
-          id: true,
-          name: true,
-          email: true,
-          createdAt: true,
-          updatedAt: true,
-        },
-      },
-      category: {
-        select: {
-          id: true,
-          name: true,
-          createdAt: true,
-          updatedAt: true,
-        },
-      },
+      dateFound,
+      locationFound,
+      contactPhone,
+      contactEmail,
+      images,
+      status: ItemStatus.AVAILABLE,
+      userId,
     },
   });
 
-  return foundItems;
+  return foundItem;
 };
 
 const getFoundItemsFromDB = async (query: any) => {
@@ -45,30 +39,29 @@ const getFoundItemsFromDB = async (query: any) => {
     limit = 10,
     sortBy,
     sortOrder,
-    foundItemName,
+    category,
   } = query;
 
   // Prepare filters
-  let where: Prisma.FoundItemWhereInput = {};
+  let where: any = {};
   if (searchTerm) {
     where = {
       OR: [
         {
-          foundItemName: {
+          locationFound: {
             contains: searchTerm as string,
             mode: "insensitive",
           },
         },
-        { location: { contains: searchTerm as string, mode: "insensitive" } },
         {
           description: { contains: searchTerm as string, mode: "insensitive" },
         },
       ],
     };
   }
-  if (foundItemName) {
-    where.foundItemName = {
-      contains: foundItemName as string,
+  if (category) {
+    where.category = {
+      contains: category as string,
       mode: "insensitive",
     };
   }
@@ -81,18 +74,6 @@ const getFoundItemsFromDB = async (query: any) => {
   // Retrieve paginated and filtered found items
   const foundItems = await prisma.foundItem.findMany({
     where,
-    include: {
-      user: {
-        select: {
-          id: true,
-          name: true,
-          email: true,
-          createdAt: true,
-          updatedAt: true,
-        },
-      },
-      category: true,
-    },
     orderBy,
     take: Number(limit),
     skip: (Number(page) - 1) * Number(limit),
