@@ -38,6 +38,7 @@ const createUserIntoBD = async (data: any) => {
   const accessToken = jwtHelpers.generateToken(
     {
       email: userData.email,
+      role: userData.role,
       userId: userData.id,
       userName: userData.name,
     },
@@ -94,12 +95,24 @@ const UpdateProfileFromDB = async (user: any, params: any) => {
   });
   return updatedProfile;
 };
+const UpdateStatusFromDB = async (userId: any, status: any) => {
+  const updatedProfile = await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      status,
+    },
+  });
+  return updatedProfile;
+};
 
 export const userService = {
   createUserIntoBD,
   getProfileFromDB,
   UpdateProfileFromDB,
   getAllUsersFromDB,
+  UpdateStatusFromDB,
 };
 
 //end

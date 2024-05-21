@@ -18,8 +18,14 @@ const userProfileUpdateSchema = z.object({
     email: z.string().optional(),
   }),
 });
+const userStatusUpdateSchema = z.object({
+  body: z.object({
+    status: z.string().optional(),
+  }),
+});
 
 export const userValidationSchemas = {
   userSchema,
   userProfileUpdateSchema,
+  userStatusUpdateSchema,
 };
