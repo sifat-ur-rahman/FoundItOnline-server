@@ -1,0 +1,100 @@
+
+
+generator client {
+  provider = "prisma-client-js"
+   output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String          @id @default(uuid())
+  name        String
+  username    String         @unique
+  email       String          @unique
+  password    String
+  status      UserStatus     @default(ACTIVE)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  lostItems      LostItem[]
+  foundItems     FoundItem[]
+  claimRequests  Claim[]
+}
+
+model LostItem {
+  id            String       @id @default(uuid())
+  category      String
+  description   String
+  dateLost      DateTime?
+  locationLost  String?
+  contactPhone  String?
+  contactEmail  String?
+  images        String?
+  status        ItemStatus    @default(PENDING)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  userId        String
+  user          User         @relation(fields: [userId], references: [id])
+  claimRequests Claim[]
+}
+
+
+
+
+model FoundItem {
+  id            String          @id @default(uuid())
+  userId         String
+  category       String
+  description    String
+  dateFound      DateTime?
+  locationFound  String?
+  contactPhone   String?
+  contactEmail   String?
+  images         String?
+  status         ItemStatus    @default(AVAILABLE)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  user           User            @relation(fields: [userId], references: [id])
+  claims         Claim[]
+}
+
+model Claim {
+  id                  String    @id @default(uuid())
+  itemId           String
+  description      String
+  contactPhone     String?
+  contactEmail     String?
+  status           ClaimStatus  @default(PENDING)
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  userId           String
+  user             User         @relation(fields: [userId], references: [id])
+  lostItemId       String?
+  lostItem         LostItem?    @relation(fields: [lostItemId], references: [id])
+  foundItemId      String?
+  foundItem        FoundItem?   @relation(fields: [foundItemId], references: [id])
+}
+
+
+
+
+enum UserStatus {
+  ACTIVE
+  DEACTIVATED
+}
+
+enum ItemStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  AVAILABLE
+}
+
+enum ClaimStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
