@@ -1,42 +1,46 @@
 import prisma from "../../../shared/prisma";
 
-const createClaimIntoBD = async (user: any, payload: any) => {
-  const userId = user.userId;
-  const { foundItemId, distinguishingFeatures, lostDate } = payload;
+const createClaimIntoBD = async (payload: any) => {
+  const {
+    userId,
+    itemId,
+    description,
+    contactPhone,
+    contactEmail,
+    status = "PENDING",
+    lostItemId,
+    foundItemId,
+  } = payload;
 
-  // Create the found item
-  const foundItems = await prisma.claim.create({
+  // Create the Claim item
+  const Claim = await prisma.claim.create({
     data: {
+      itemId,
+      description,
+      contactPhone,
+      contactEmail,
+      status,
       userId,
+      lostItemId,
       foundItemId,
-      distinguishingFeatures,
-      lostDate,
     },
   });
 
-  return foundItems;
+  return Claim;
 };
 
-const getClaimByUserFromDB = async (user: any) => {
+const getAllClaimFromDB = async (userId: any) => {
   const claims = await prisma.claim.findMany({
     where: {
-      userId: user.userId,
+      userId: userId,
     },
-    include: {
-      foundItem: {
-        include: {
-          user: {
-            select: {
-              id: true,
-              name: true,
-              email: true,
-              createdAt: true,
-              updatedAt: true,
-            },
-          },
-          category: true,
-        },
-      },
+  });
+  return claims;
+};
+const getClaimByUserFromDB = async (userId: any) => {
+  const claims = await prisma.claim.findMany({
+    where: {
+      userId: userId,
     },
   });
 
@@ -60,6 +64,7 @@ const UpdateClaimByIdFromDB = async (id: any, params: any) => {
 };
 export const ClaimService = {
   createClaimIntoBD,
+  getAllClaimFromDB,
   getClaimByUserFromDB,
   UpdateClaimByIdFromDB,
 };

@@ -3,34 +3,38 @@ import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import { ClaimService } from "./claim.service";
 
-const createClaim = catchAsync(
-  async (req: Request & { user?: any }, res: Response) => {
-    const user = req.user;
+const createClaim = catchAsync(async (req: Request, res: Response) => {
+  const result = await ClaimService.createClaimIntoBD(req.body);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Claim created successfully",
+    data: result,
+  });
+});
 
-    const result = await ClaimService.createClaimIntoBD(user, req.body);
-    sendResponse(res, {
-      statusCode: 201,
-      success: true,
-      message: "Claim created successfully",
-      data: result,
-    });
-  }
-);
+const getClaims = catchAsync(async (req: Request, res: Response) => {
+  const result = await ClaimService.getAllClaimFromDB(req.query);
 
-const getClaimByUserId = catchAsync(
-  async (req: Request & { user?: any }, res: Response) => {
-    const user = req.user;
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "All Claims retrieved successfully",
+    data: result,
+  });
+});
+const getClaimByUserId = catchAsync(async (req: Request, res: Response) => {
+  const { userId } = req.params;
 
-    const result = await ClaimService.getClaimByUserFromDB(user);
+  const result = await ClaimService.getClaimByUserFromDB(userId);
 
-    sendResponse(res, {
-      statusCode: 200,
-      success: true,
-      message: "Claims retrieved successfully",
-      data: result,
-    });
-  }
-);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Claims retrieved successfully",
+    data: result,
+  });
+});
 
 const updateClaimById = catchAsync(async (req: Request, res: Response) => {
   const { claimId } = req.params;
@@ -48,4 +52,5 @@ export const ClaimController = {
   createClaim,
   getClaimByUserId,
   updateClaimById,
+  getClaims,
 };

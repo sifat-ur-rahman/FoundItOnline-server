@@ -8,14 +8,17 @@ import { ClaimValidationSchemas } from "./claim.validation";
 const router = express.Router();
 
 router.post(
-  "/claims",
+  "/claim",
   validateRequest(ClaimValidationSchemas.ClaimSchema),
   auth(),
   ClaimController.createClaim
 );
-router.get("/claims", auth(), ClaimController.getClaimByUserId);
+router.get("/claims", auth(), ClaimController.getClaims);
+
+router.get("/claims/:claimId", auth(), ClaimController.getClaimByUserId);
+
 router.put(
-  "/claims/:claimId",
+  "/claim/:claimId",
   validateRequest(ClaimValidationSchemas.ClaimUpdateSchema),
   auth(),
   ClaimController.updateClaimById

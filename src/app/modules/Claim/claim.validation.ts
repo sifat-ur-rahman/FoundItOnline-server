@@ -2,11 +2,14 @@ import { z } from "zod";
 
 const ClaimSchema = z.object({
   body: z.object({
-    foundItemId: z.string({ required_error: "CategoryId is required!" }),
-    distinguishingFeatures: z
-      .string()
-      .min(1, { message: "Distinguishing features must not be empty." }),
-    lostDate: z.string(),
+    itemId: z.string(),
+    description: z.string().min(10),
+    contactPhone: z.string().min(10).max(15).optional(),
+    contactEmail: z.string().email().optional(),
+    status: z.enum(["PENDING", "APPROVED", "REJECTED"]).optional(),
+    userId: z.string(),
+    lostItemId: z.string().nullable().optional(),
+    foundItemId: z.string().nullable().optional(),
   }),
 });
 const ClaimUpdateSchema = z.object({
