@@ -2309,7 +2309,7 @@ export namespace Prisma {
     id: string | null
     category: string | null
     description: string | null
-    dateLost: Date | null
+    dateLost: string | null
     locationLost: string | null
     contactPhone: string | null
     contactEmail: string | null
@@ -2324,7 +2324,7 @@ export namespace Prisma {
     id: string | null
     category: string | null
     description: string | null
-    dateLost: Date | null
+    dateLost: string | null
     locationLost: string | null
     contactPhone: string | null
     contactEmail: string | null
@@ -2474,7 +2474,7 @@ export namespace Prisma {
     id: string
     category: string
     description: string
-    dateLost: Date | null
+    dateLost: string | null
     locationLost: string | null
     contactPhone: string | null
     contactEmail: string | null
@@ -2553,7 +2553,7 @@ export namespace Prisma {
       id: string
       category: string
       description: string
-      dateLost: Date | null
+      dateLost: string | null
       locationLost: string | null
       contactPhone: string | null
       contactEmail: string | null
@@ -2962,7 +2962,7 @@ export namespace Prisma {
     readonly id: FieldRef<"LostItem", 'String'>
     readonly category: FieldRef<"LostItem", 'String'>
     readonly description: FieldRef<"LostItem", 'String'>
-    readonly dateLost: FieldRef<"LostItem", 'DateTime'>
+    readonly dateLost: FieldRef<"LostItem", 'String'>
     readonly locationLost: FieldRef<"LostItem", 'String'>
     readonly contactPhone: FieldRef<"LostItem", 'String'>
     readonly contactEmail: FieldRef<"LostItem", 'String'>
@@ -3319,7 +3319,7 @@ export namespace Prisma {
     userId: string | null
     category: string | null
     description: string | null
-    dateFound: Date | null
+    dateFound: string | null
     locationFound: string | null
     contactPhone: string | null
     contactEmail: string | null
@@ -3334,7 +3334,7 @@ export namespace Prisma {
     userId: string | null
     category: string | null
     description: string | null
-    dateFound: Date | null
+    dateFound: string | null
     locationFound: string | null
     contactPhone: string | null
     contactEmail: string | null
@@ -3484,7 +3484,7 @@ export namespace Prisma {
     userId: string
     category: string
     description: string
-    dateFound: Date | null
+    dateFound: string | null
     locationFound: string | null
     contactPhone: string | null
     contactEmail: string | null
@@ -3563,7 +3563,7 @@ export namespace Prisma {
       userId: string
       category: string
       description: string
-      dateFound: Date | null
+      dateFound: string | null
       locationFound: string | null
       contactPhone: string | null
       contactEmail: string | null
@@ -3972,7 +3972,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"FoundItem", 'String'>
     readonly category: FieldRef<"FoundItem", 'String'>
     readonly description: FieldRef<"FoundItem", 'String'>
-    readonly dateFound: FieldRef<"FoundItem", 'DateTime'>
+    readonly dateFound: FieldRef<"FoundItem", 'String'>
     readonly locationFound: FieldRef<"FoundItem", 'String'>
     readonly contactPhone: FieldRef<"FoundItem", 'String'>
     readonly contactEmail: FieldRef<"FoundItem", 'String'>
@@ -5610,7 +5610,7 @@ export namespace Prisma {
     id?: StringFilter<"LostItem"> | string
     category?: StringFilter<"LostItem"> | string
     description?: StringFilter<"LostItem"> | string
-    dateLost?: DateTimeNullableFilter<"LostItem"> | Date | string | null
+    dateLost?: StringNullableFilter<"LostItem"> | string | null
     locationLost?: StringNullableFilter<"LostItem"> | string | null
     contactPhone?: StringNullableFilter<"LostItem"> | string | null
     contactEmail?: StringNullableFilter<"LostItem"> | string | null
@@ -5647,7 +5647,7 @@ export namespace Prisma {
     NOT?: LostItemWhereInput | LostItemWhereInput[]
     category?: StringFilter<"LostItem"> | string
     description?: StringFilter<"LostItem"> | string
-    dateLost?: DateTimeNullableFilter<"LostItem"> | Date | string | null
+    dateLost?: StringNullableFilter<"LostItem"> | string | null
     locationLost?: StringNullableFilter<"LostItem"> | string | null
     contactPhone?: StringNullableFilter<"LostItem"> | string | null
     contactEmail?: StringNullableFilter<"LostItem"> | string | null
@@ -5685,7 +5685,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"LostItem"> | string
     category?: StringWithAggregatesFilter<"LostItem"> | string
     description?: StringWithAggregatesFilter<"LostItem"> | string
-    dateLost?: DateTimeNullableWithAggregatesFilter<"LostItem"> | Date | string | null
+    dateLost?: StringNullableWithAggregatesFilter<"LostItem"> | string | null
     locationLost?: StringNullableWithAggregatesFilter<"LostItem"> | string | null
     contactPhone?: StringNullableWithAggregatesFilter<"LostItem"> | string | null
     contactEmail?: StringNullableWithAggregatesFilter<"LostItem"> | string | null
@@ -5704,7 +5704,7 @@ export namespace Prisma {
     userId?: StringFilter<"FoundItem"> | string
     category?: StringFilter<"FoundItem"> | string
     description?: StringFilter<"FoundItem"> | string
-    dateFound?: DateTimeNullableFilter<"FoundItem"> | Date | string | null
+    dateFound?: StringNullableFilter<"FoundItem"> | string | null
     locationFound?: StringNullableFilter<"FoundItem"> | string | null
     contactPhone?: StringNullableFilter<"FoundItem"> | string | null
     contactEmail?: StringNullableFilter<"FoundItem"> | string | null
@@ -5741,7 +5741,7 @@ export namespace Prisma {
     userId?: StringFilter<"FoundItem"> | string
     category?: StringFilter<"FoundItem"> | string
     description?: StringFilter<"FoundItem"> | string
-    dateFound?: DateTimeNullableFilter<"FoundItem"> | Date | string | null
+    dateFound?: StringNullableFilter<"FoundItem"> | string | null
     locationFound?: StringNullableFilter<"FoundItem"> | string | null
     contactPhone?: StringNullableFilter<"FoundItem"> | string | null
     contactEmail?: StringNullableFilter<"FoundItem"> | string | null
@@ -5779,7 +5779,7 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"FoundItem"> | string
     category?: StringWithAggregatesFilter<"FoundItem"> | string
     description?: StringWithAggregatesFilter<"FoundItem"> | string
-    dateFound?: DateTimeNullableWithAggregatesFilter<"FoundItem"> | Date | string | null
+    dateFound?: StringNullableWithAggregatesFilter<"FoundItem"> | string | null
     locationFound?: StringNullableWithAggregatesFilter<"FoundItem"> | string | null
     contactPhone?: StringNullableWithAggregatesFilter<"FoundItem"> | string | null
     contactEmail?: StringNullableWithAggregatesFilter<"FoundItem"> | string | null
@@ -5980,7 +5980,7 @@ export namespace Prisma {
     id?: string
     category: string
     description: string
-    dateLost?: Date | string | null
+    dateLost?: string | null
     locationLost?: string | null
     contactPhone?: string | null
     contactEmail?: string | null
@@ -5996,7 +5996,7 @@ export namespace Prisma {
     id?: string
     category: string
     description: string
-    dateLost?: Date | string | null
+    dateLost?: string | null
     locationLost?: string | null
     contactPhone?: string | null
     contactEmail?: string | null
@@ -6012,7 +6012,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateLost?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLost?: NullableStringFieldUpdateOperationsInput | string | null
     locationLost?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6028,7 +6028,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateLost?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLost?: NullableStringFieldUpdateOperationsInput | string | null
     locationLost?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6044,7 +6044,7 @@ export namespace Prisma {
     id?: string
     category: string
     description: string
-    dateLost?: Date | string | null
+    dateLost?: string | null
     locationLost?: string | null
     contactPhone?: string | null
     contactEmail?: string | null
@@ -6059,7 +6059,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateLost?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLost?: NullableStringFieldUpdateOperationsInput | string | null
     locationLost?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6073,7 +6073,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateLost?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLost?: NullableStringFieldUpdateOperationsInput | string | null
     locationLost?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6088,7 +6088,7 @@ export namespace Prisma {
     id?: string
     category: string
     description: string
-    dateFound?: Date | string | null
+    dateFound?: string | null
     locationFound?: string | null
     contactPhone?: string | null
     contactEmail?: string | null
@@ -6105,7 +6105,7 @@ export namespace Prisma {
     userId: string
     category: string
     description: string
-    dateFound?: Date | string | null
+    dateFound?: string | null
     locationFound?: string | null
     contactPhone?: string | null
     contactEmail?: string | null
@@ -6120,7 +6120,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateFound?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFound?: NullableStringFieldUpdateOperationsInput | string | null
     locationFound?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6137,7 +6137,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateFound?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFound?: NullableStringFieldUpdateOperationsInput | string | null
     locationFound?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6153,7 +6153,7 @@ export namespace Prisma {
     userId: string
     category: string
     description: string
-    dateFound?: Date | string | null
+    dateFound?: string | null
     locationFound?: string | null
     contactPhone?: string | null
     contactEmail?: string | null
@@ -6167,7 +6167,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateFound?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFound?: NullableStringFieldUpdateOperationsInput | string | null
     locationFound?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6182,7 +6182,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateFound?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFound?: NullableStringFieldUpdateOperationsInput | string | null
     locationFound?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6466,17 +6466,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type EnumItemStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.ItemStatus | EnumItemStatusFieldRefInput<$PrismaModel>
     in?: $Enums.ItemStatus[] | ListEnumItemStatusFieldRefInput<$PrismaModel>
@@ -6532,20 +6521,6 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type EnumItemStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -6834,10 +6809,6 @@ export namespace Prisma {
     connect?: ClaimWhereUniqueInput | ClaimWhereUniqueInput[]
   }
 
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
   export type EnumItemStatusFieldUpdateOperationsInput = {
     set?: $Enums.ItemStatus
   }
@@ -7110,36 +7081,11 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type NestedEnumItemStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.ItemStatus | EnumItemStatusFieldRefInput<$PrismaModel>
     in?: $Enums.ItemStatus[] | ListEnumItemStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.ItemStatus[] | ListEnumItemStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumItemStatusFilter<$PrismaModel> | $Enums.ItemStatus
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumItemStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -7173,7 +7119,7 @@ export namespace Prisma {
     id?: string
     category: string
     description: string
-    dateLost?: Date | string | null
+    dateLost?: string | null
     locationLost?: string | null
     contactPhone?: string | null
     contactEmail?: string | null
@@ -7188,7 +7134,7 @@ export namespace Prisma {
     id?: string
     category: string
     description: string
-    dateLost?: Date | string | null
+    dateLost?: string | null
     locationLost?: string | null
     contactPhone?: string | null
     contactEmail?: string | null
@@ -7213,7 +7159,7 @@ export namespace Prisma {
     id?: string
     category: string
     description: string
-    dateFound?: Date | string | null
+    dateFound?: string | null
     locationFound?: string | null
     contactPhone?: string | null
     contactEmail?: string | null
@@ -7228,7 +7174,7 @@ export namespace Prisma {
     id?: string
     category: string
     description: string
-    dateFound?: Date | string | null
+    dateFound?: string | null
     locationFound?: string | null
     contactPhone?: string | null
     contactEmail?: string | null
@@ -7308,7 +7254,7 @@ export namespace Prisma {
     id?: StringFilter<"LostItem"> | string
     category?: StringFilter<"LostItem"> | string
     description?: StringFilter<"LostItem"> | string
-    dateLost?: DateTimeNullableFilter<"LostItem"> | Date | string | null
+    dateLost?: StringNullableFilter<"LostItem"> | string | null
     locationLost?: StringNullableFilter<"LostItem"> | string | null
     contactPhone?: StringNullableFilter<"LostItem"> | string | null
     contactEmail?: StringNullableFilter<"LostItem"> | string | null
@@ -7343,7 +7289,7 @@ export namespace Prisma {
     userId?: StringFilter<"FoundItem"> | string
     category?: StringFilter<"FoundItem"> | string
     description?: StringFilter<"FoundItem"> | string
-    dateFound?: DateTimeNullableFilter<"FoundItem"> | Date | string | null
+    dateFound?: StringNullableFilter<"FoundItem"> | string | null
     locationFound?: StringNullableFilter<"FoundItem"> | string | null
     contactPhone?: StringNullableFilter<"FoundItem"> | string | null
     contactEmail?: StringNullableFilter<"FoundItem"> | string | null
@@ -7671,7 +7617,7 @@ export namespace Prisma {
     id?: string
     category: string
     description: string
-    dateLost?: Date | string | null
+    dateLost?: string | null
     locationLost?: string | null
     contactPhone?: string | null
     contactEmail?: string | null
@@ -7686,7 +7632,7 @@ export namespace Prisma {
     id?: string
     category: string
     description: string
-    dateLost?: Date | string | null
+    dateLost?: string | null
     locationLost?: string | null
     contactPhone?: string | null
     contactEmail?: string | null
@@ -7706,7 +7652,7 @@ export namespace Prisma {
     id?: string
     category: string
     description: string
-    dateFound?: Date | string | null
+    dateFound?: string | null
     locationFound?: string | null
     contactPhone?: string | null
     contactEmail?: string | null
@@ -7722,7 +7668,7 @@ export namespace Prisma {
     userId: string
     category: string
     description: string
-    dateFound?: Date | string | null
+    dateFound?: string | null
     locationFound?: string | null
     contactPhone?: string | null
     contactEmail?: string | null
@@ -7791,7 +7737,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateLost?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLost?: NullableStringFieldUpdateOperationsInput | string | null
     locationLost?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7806,7 +7752,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateLost?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLost?: NullableStringFieldUpdateOperationsInput | string | null
     locationLost?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7832,7 +7778,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateFound?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFound?: NullableStringFieldUpdateOperationsInput | string | null
     locationFound?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7848,7 +7794,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateFound?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFound?: NullableStringFieldUpdateOperationsInput | string | null
     locationFound?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7862,7 +7808,7 @@ export namespace Prisma {
     id?: string
     category: string
     description: string
-    dateLost?: Date | string | null
+    dateLost?: string | null
     locationLost?: string | null
     contactPhone?: string | null
     contactEmail?: string | null
@@ -7876,7 +7822,7 @@ export namespace Prisma {
     id?: string
     category: string
     description: string
-    dateFound?: Date | string | null
+    dateFound?: string | null
     locationFound?: string | null
     contactPhone?: string | null
     contactEmail?: string | null
@@ -7903,7 +7849,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateLost?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLost?: NullableStringFieldUpdateOperationsInput | string | null
     locationLost?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7918,7 +7864,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateLost?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLost?: NullableStringFieldUpdateOperationsInput | string | null
     locationLost?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7933,7 +7879,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateLost?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateLost?: NullableStringFieldUpdateOperationsInput | string | null
     locationLost?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7947,7 +7893,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateFound?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFound?: NullableStringFieldUpdateOperationsInput | string | null
     locationFound?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7962,7 +7908,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateFound?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFound?: NullableStringFieldUpdateOperationsInput | string | null
     locationFound?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7977,7 +7923,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    dateFound?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    dateFound?: NullableStringFieldUpdateOperationsInput | string | null
     locationFound?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null

@@ -2,7 +2,7 @@ import express from "express";
 import { userRoutes } from "../modules/User/user.routes";
 
 import { AuthRoutes } from "../modules/Auth/auth.routes";
-import { CategoryRoutes } from "../modules/Category/category.routes";
+import { LostItemRoutes } from "../modules/LostItem/lostItem.routes";
 import { ReportRoutes } from "../modules/FoundItem/foundItem.routes";
 import { ClaimRoutes } from "../modules/Claim/claim.routes";
 
@@ -15,7 +15,7 @@ const moduleRoutes = [
   },
   {
     path: "/",
-    route: CategoryRoutes,
+    route: LostItemRoutes,
   },
   {
     path: "/",

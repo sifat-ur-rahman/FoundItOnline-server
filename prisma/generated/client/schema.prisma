@@ -29,7 +29,7 @@ model LostItem {
   id            String       @id @default(uuid())
   category      String
   description   String
-  dateLost      DateTime?
+  dateLost      String?
   locationLost  String?
   contactPhone  String?
   contactEmail  String?
@@ -50,7 +50,7 @@ model FoundItem {
   userId         String
   category       String
   description    String
-  dateFound      DateTime?
+  dateFound      String?
   locationFound  String?
   contactPhone   String?
   contactEmail   String?
