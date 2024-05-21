@@ -8,11 +8,36 @@ const createLostItem = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: 201,
     success: true,
-    message: "Found item LostItem created successfully",
+    message: "Lost Item created successfully",
     data: result,
   });
 });
 
+const getLostItems = catchAsync(async (req: Request, res: Response) => {
+  const result = await LostItemService.getLostItemsFromDB(req.query);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Lost items retrieved successfully",
+    data: result,
+  });
+});
+
+const getLostItemsByUser = catchAsync(async (req: Request, res: Response) => {
+  const { userId } = req.params;
+
+  const result = await LostItemService.getLostItemsByUserIdFromDB(userId);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Get Lost Items By UserId successfully",
+    data: result,
+  });
+});
 export const LostItemController = {
   createLostItem,
+  getLostItems,
+  getLostItemsByUser,
 };
