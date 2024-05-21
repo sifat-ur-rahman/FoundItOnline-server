@@ -14,6 +14,8 @@ router.post(
 
 router.get("/my-profile", auth(), userController.getMyProfile);
 
+router.get("/all-users", userController.getAllUsers);
+
 router.put(
   "/my-profile",
   validateRequest(userValidationSchemas.userProfileUpdateSchema),

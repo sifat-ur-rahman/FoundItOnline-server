@@ -36,6 +36,16 @@ const getMyProfile = catchAsync(
     });
   }
 );
+const getAllUsers = catchAsync(async (req: Request, res: Response) => {
+  const result = await userService.getAllUsersFromDB();
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "All user retrieved successfully",
+    data: result,
+  });
+});
 const updateMyProfile = catchAsync(
   async (req: Request & { user?: any }, res: Response) => {
     const user = req.user;
@@ -54,4 +64,5 @@ export const userController = {
   createUser,
   getMyProfile,
   updateMyProfile,
+  getAllUsers,
 };

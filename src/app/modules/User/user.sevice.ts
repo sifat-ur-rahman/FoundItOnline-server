@@ -66,6 +66,18 @@ const getProfileFromDB = async (user: any) => {
   const { password: _, ...userData } = userProfileData;
   return userData;
 };
+const getAllUsersFromDB = async () => {
+  const users = await prisma.user.findMany({
+    select: {
+      id: true,
+      username: true,
+      email: true,
+      status: true,
+    },
+  });
+
+  return users;
+};
 const UpdateProfileFromDB = async (user: any, params: any) => {
   const { name, email, username, status } = params;
 
@@ -87,6 +99,7 @@ export const userService = {
   createUserIntoBD,
   getProfileFromDB,
   UpdateProfileFromDB,
+  getAllUsersFromDB,
 };
 
 //end
