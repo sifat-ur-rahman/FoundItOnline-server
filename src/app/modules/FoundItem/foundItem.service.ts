@@ -1,10 +1,9 @@
-import { Prisma } from "@prisma/client";
 import prisma from "../../../shared/prisma";
 import { ItemStatus, UserStatus } from "../../../../prisma/generated/client";
 
-const createReportIntoBD = async (user: any, payload: any) => {
-  const userId = user.userId;
+const createReportIntoBD = async (payload: any) => {
   const {
+    userId,
     category,
     description,
     dateFound,
@@ -91,7 +90,18 @@ const getFoundItemsFromDB = async (query: any) => {
 
   return responseData;
 };
+
+const getFoundItemsByUserIdFromDB = async (userId: any) => {
+  const FoundItems = await prisma.foundItem.findMany({
+    where: {
+      userId: userId,
+    },
+  });
+
+  return FoundItems;
+};
 export const FoundItemsService = {
   createReportIntoBD,
   getFoundItemsFromDB,
+  getFoundItemsByUserIdFromDB,
 };

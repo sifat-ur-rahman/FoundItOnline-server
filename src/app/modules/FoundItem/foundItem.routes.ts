@@ -15,4 +15,6 @@ router.post(
 );
 router.get("/found-items", FoundItemsController.getFoundItems);
 
+router.get("/found-items/:userId", FoundItemsController.getFoundItemsByUser);
+
 export const ReportRoutes = router;
