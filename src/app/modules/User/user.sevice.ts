@@ -14,14 +14,14 @@ const createUserIntoBD = async (data: any) => {
   });
 
   if (existingUserEmail) {
-    throw new ApiError(httpStatus.NOT_FOUND, "Email already in use.");
+    throw new ApiError(404, "Email already in use.");
   }
   const existingUserName = await prisma.user.findUnique({
     where: { username },
   });
 
   if (existingUserName) {
-    throw new ApiError(httpStatus.NOT_FOUND, "Username already in use.");
+    throw new ApiError(404, "Username already in use.");
   }
   // Hash password
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -51,6 +51,7 @@ const createUserIntoBD = async (data: any) => {
     id: user.id,
     name: user.name,
     username: user.username,
+    role: userData.role,
     email: user.email,
     accessToken,
   };
@@ -72,6 +73,7 @@ const getAllUsersFromDB = async () => {
     select: {
       id: true,
       username: true,
+      name: true,
       email: true,
       status: true,
     },
@@ -96,6 +98,7 @@ const UpdateProfileFromDB = async (user: any, params: any) => {
   return updatedProfile;
 };
 const UpdateStatusFromDB = async (userId: any, status: any) => {
+  
   const updatedProfile = await prisma.user.update({
     where: {
       id: userId,

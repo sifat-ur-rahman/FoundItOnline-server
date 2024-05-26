@@ -3,24 +3,17 @@ import { userService } from "./user.sevice";
 import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 
-const createUser = async (req: Request, res: Response) => {
-  try {
-    //console.log(req.body);
-    const result = await userService.createUserIntoBD(req.body);
-    res.status(201).json({
-      success: true,
-      statusCode: 201,
-      message: "User registered successfully",
-      data: result,
-    });
-  } catch (err: any) {
-    res.status(500).json({
-      success: false,
-      message: err?.name || "Something went wrong",
-      error: err,
-    });
-  }
-};
+const createUser = catchAsync(async (req: Request, res: Response) => {
+  //console.log(req.body);
+  const result = await userService.createUserIntoBD(req.body);
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "User logged in successfully",
+    data: result,
+  });
+});
 
 const getMyProfile = catchAsync(
   async (req: Request & { user?: any }, res: Response) => {

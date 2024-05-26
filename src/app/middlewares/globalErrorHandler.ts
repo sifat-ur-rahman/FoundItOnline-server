@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import httpStatus from "http-status";
+
 import { ZodError } from "zod";
 import handleZodError from "../errors/handleZodError";
+import ApiError from "../errors/ApiError";
 
 // const globalErrorHandler = (
 //   err: any,
