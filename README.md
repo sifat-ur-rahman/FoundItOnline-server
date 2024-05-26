@@ -2,9 +2,13 @@
 
 Welcome to the FoundIt Online Server repository. This project is the back-end part of the FoundIt Online platform, providing the API and database functionalities required to support the client.
 
+## Clint Live Link
+
+### https://found-it-online-client.vercel.app
+
 ## Server Live Link
 
-### https://lostfoundserver.vercel.app/
+### https://found-it-online-server.vercel.app
 
 ## Features
 
