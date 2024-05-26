@@ -4,11 +4,14 @@ exports.ClaimValidationSchemas = void 0;
 const zod_1 = require("zod");
 const ClaimSchema = zod_1.z.object({
     body: zod_1.z.object({
-        foundItemId: zod_1.z.string({ required_error: "CategoryId is required!" }),
-        distinguishingFeatures: zod_1.z
-            .string()
-            .min(1, { message: "Distinguishing features must not be empty." }),
-        lostDate: zod_1.z.string(),
+        itemId: zod_1.z.string(),
+        description: zod_1.z.string(),
+        contactPhone: zod_1.z.string().optional(),
+        contactEmail: zod_1.z.string().email().optional(),
+        status: zod_1.z.enum(["PENDING", "APPROVED", "REJECTED"]).optional(),
+        userId: zod_1.z.string(),
+        lostItemId: zod_1.z.string().nullable().optional(),
+        foundItemId: zod_1.z.string().nullable().optional(),
     }),
 });
 const ClaimUpdateSchema = zod_1.z.object({

@@ -14,40 +14,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ClaimService = void 0;
 const prisma_1 = __importDefault(require("../../../shared/prisma"));
-const createClaimIntoBD = (user, payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const userId = user.userId;
-    const { foundItemId, distinguishingFeatures, lostDate } = payload;
-    // Create the found item
-    const foundItems = yield prisma_1.default.claim.create({
+const createClaimIntoBD = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId, itemId, description, contactPhone, contactEmail, status = "PENDING", lostItemId, foundItemId, } = payload;
+    // Create the Claim item
+    const Claim = yield prisma_1.default.claim.create({
         data: {
+            itemId,
+            description,
+            contactPhone,
+            contactEmail,
+            status,
             userId,
+            lostItemId,
             foundItemId,
-            distinguishingFeatures,
-            lostDate,
         },
     });
-    return foundItems;
+    return Claim;
 });
-const getClaimByUserFromDB = (user) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllClaimFromDB = (userId) => __awaiter(void 0, void 0, void 0, function* () {
     const claims = yield prisma_1.default.claim.findMany({
         where: {
-            userId: user.userId,
+            userId: userId,
         },
-        include: {
-            foundItem: {
-                include: {
-                    user: {
-                        select: {
-                            id: true,
-                            name: true,
-                            email: true,
-                            createdAt: true,
-                            updatedAt: true,
-                        },
-                    },
-                    category: true,
-                },
-            },
+    });
+    return claims;
+});
+const getClaimByUserFromDB = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    const claims = yield prisma_1.default.claim.findMany({
+        where: {
+            userId: userId,
         },
     });
     return claims;
@@ -67,6 +62,7 @@ const UpdateClaimByIdFromDB = (id, params) => __awaiter(void 0, void 0, void 0, 
 });
 exports.ClaimService = {
     createClaimIntoBD,
+    getAllClaimFromDB,
     getClaimByUserFromDB,
     UpdateClaimByIdFromDB,
 };

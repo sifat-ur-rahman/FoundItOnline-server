@@ -51,18 +51,27 @@ const config_1 = __importDefault(require("../../../config"));
 const jwtHelpers_1 = require("../../../helpars/jwtHelpers");
 const prisma_1 = __importDefault(require("../../../shared/prisma"));
 const bcrypt = __importStar(require("bcrypt"));
+const ApiError_1 = __importDefault(require("../../errors/ApiError"));
+const http_status_1 = __importDefault(require("http-status"));
 const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const userData = yield prisma_1.default.user.findUniqueOrThrow({
+    const userData = yield prisma_1.default.user.findFirst({
         where: {
-            email: payload.email,
+            OR: [
+                { email: payload.usernameOrEmail },
+                { username: payload.usernameOrEmail },
+            ],
         },
     });
+    if (!userData) {
+        throw new ApiError_1.default(http_status_1.default.NOT_FOUND, "User dose not exist");
+    }
     const isCorrectPassword = yield bcrypt.compare(payload.password, userData.password);
     if (!isCorrectPassword) {
-        throw new Error("Password incorrect!");
+        throw new ApiError_1.default(http_status_1.default.NOT_ACCEPTABLE, "Your Password incorrect!");
     }
     const accessToken = jwtHelpers_1.jwtHelpers.generateToken({
         email: userData.email,
+        role: userData.role,
         userId: userData.id,
         userName: userData.name,
     }, config_1.default.jwt.jwt_secret, config_1.default.jwt.expires_in);
@@ -70,11 +79,42 @@ const loginUser = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const responsesData = {
         id: user.id,
         name: user.name,
+        role: userData.role,
+        username: user.username,
         email: user.email,
-        token: accessToken,
+        accessToken,
     };
     return responsesData;
 });
+const changePassword = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const userData = yield prisma_1.default.user.findUniqueOrThrow({
+        where: {
+            email: payload.email,
+        },
+    });
+    if (!userData) {
+        throw new ApiError_1.default(http_status_1.default.NOT_FOUND, "User dose not exist");
+    }
+    const isCorrectPassword = yield bcrypt.compare(payload.currentPassword, userData.password);
+    if (!isCorrectPassword) {
+        throw new ApiError_1.default(http_status_1.default.NOT_ACCEPTABLE, "Your Password incorrect!");
+    }
+    const hashedPassword = yield bcrypt.hash(payload.newPassword, 12);
+    yield prisma_1.default.user.update({
+        where: {
+            email: userData.email,
+        },
+        data: {
+            password: hashedPassword,
+        },
+    });
+    const { password: _ } = userData, user = __rest(userData, ["password"]);
+    return {
+        user,
+    };
+    // return responsesData;
+});
 exports.AuthServices = {
     loginUser,
+    changePassword,
 };

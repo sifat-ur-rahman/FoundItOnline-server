@@ -12,28 +12,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FoundItemsService = void 0;
+exports.LostItemService = void 0;
 const prisma_1 = __importDefault(require("../../../shared/prisma"));
-const client_1 = require("../../../../prisma/generated/client");
-const createReportIntoBD = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const { userId, category, description, dateFound, locationFound, contactPhone, contactEmail, images, } = payload;
-    // Create the found item
-    const foundItem = yield prisma_1.default.foundItem.create({
+const createLostItemIntoBD = (data) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId, category, description, dateLost, locationLost, contactPhone, contactEmail, images, } = data;
+    // Create the LostItem
+    const LostItem = yield prisma_1.default.lostItem.create({
         data: {
+            userId,
             category,
             description,
-            dateFound,
-            locationFound,
+            dateLost,
+            locationLost,
             contactPhone,
             contactEmail,
             images,
-            status: client_1.ItemStatus.AVAILABLE,
-            userId,
         },
     });
-    return foundItem;
+    return LostItem;
 });
-const getFoundItemsFromDB = (query) => __awaiter(void 0, void 0, void 0, function* () {
+const getLostItemsFromDB = (query) => __awaiter(void 0, void 0, void 0, function* () {
     const { searchTerm, page = 1, limit = 10, sortBy, sortOrder, category, } = query;
     // Prepare filters
     let where = {};
@@ -63,33 +61,33 @@ const getFoundItemsFromDB = (query) => __awaiter(void 0, void 0, void 0, functio
         ? { [sortBy]: sortOrder || "asc" }
         : undefined;
     // Retrieve paginated and filtered found items
-    const foundItems = yield prisma_1.default.foundItem.findMany({
+    const lostItems = yield prisma_1.default.lostItem.findMany({
         where,
         orderBy,
         take: Number(limit),
         skip: (Number(page) - 1) * Number(limit),
     });
-    const total = yield prisma_1.default.foundItem.count({ where });
+    const total = yield prisma_1.default.lostItem.count({ where });
     const responseData = {
         meta: {
             total,
             page: Number(page),
             limit: Number(limit),
         },
-        data: foundItems,
+        data: lostItems,
     };
     return responseData;
 });
-const getFoundItemsByUserIdFromDB = (userId) => __awaiter(void 0, void 0, void 0, function* () {
-    const FoundItems = yield prisma_1.default.foundItem.findMany({
+const getLostItemsByUserIdFromDB = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    const lostItems = yield prisma_1.default.lostItem.findMany({
         where: {
             userId: userId,
         },
     });
-    return FoundItems;
+    return lostItems;
 });
-exports.FoundItemsService = {
-    createReportIntoBD,
-    getFoundItemsFromDB,
-    getFoundItemsByUserIdFromDB,
+exports.LostItemService = {
+    createLostItemIntoBD,
+    getLostItemsFromDB,
+    getLostItemsByUserIdFromDB,
 };

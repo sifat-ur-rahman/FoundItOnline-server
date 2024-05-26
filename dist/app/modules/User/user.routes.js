@@ -12,5 +12,7 @@ const user_validations_1 = require("./user.validations");
 const router = express_1.default.Router();
 router.post("/register", (0, validateRequest_1.default)(user_validations_1.userValidationSchemas.userSchema), user_controller_1.userController.createUser);
 router.get("/my-profile", (0, auth_1.default)(), user_controller_1.userController.getMyProfile);
+router.get("/all-users", user_controller_1.userController.getAllUsers);
 router.put("/my-profile", (0, validateRequest_1.default)(user_validations_1.userValidationSchemas.userProfileUpdateSchema), (0, auth_1.default)(), user_controller_1.userController.updateMyProfile);
+router.put("/user/:userId/status", (0, validateRequest_1.default)(user_validations_1.userValidationSchemas.userStatusUpdateSchema), (0, auth_1.default)(), user_controller_1.userController.updateStatus);
 exports.userRoutes = router;

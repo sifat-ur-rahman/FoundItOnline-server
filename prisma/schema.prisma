@@ -63,7 +63,7 @@ model FoundItem {
 }
 
 model Claim {
-  id                  String    @id @default(uuid())
+  id               String    @id @default(uuid())
   itemId           String
   description      String
   contactPhone     String?

@@ -49,73 +49,94 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.userService = void 0;
 const bcrypt = __importStar(require("bcrypt"));
 const prisma_1 = __importDefault(require("../../../shared/prisma"));
+const ApiError_1 = __importDefault(require("../../errors/ApiError"));
+const jwtHelpers_1 = require("../../../helpars/jwtHelpers");
+const config_1 = __importDefault(require("../../../config"));
 const createUserIntoBD = (data) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, email, password, profile } = data;
+    const { name, email, username, password } = data;
+    const existingUserEmail = yield prisma_1.default.user.findUnique({
+        where: { email },
+    });
+    if (existingUserEmail) {
+        throw new ApiError_1.default(404, "Email already in use.");
+    }
+    const existingUserName = yield prisma_1.default.user.findUnique({
+        where: { username },
+    });
+    if (existingUserName) {
+        throw new ApiError_1.default(404, "Username already in use.");
+    }
     // Hash password
     const hashedPassword = yield bcrypt.hash(password, 10);
-    // Transactional approach to create user and profile
-    const user = yield prisma_1.default.$transaction((prisma) => __awaiter(void 0, void 0, void 0, function* () {
-        const newUser = yield prisma.user.create({
-            data: {
-                name,
-                email,
-                password: hashedPassword,
-                profile: {
-                    create: {
-                        bio: profile.bio,
-                        age: profile.age,
-                    },
-                },
-            },
-            include: {
-                profile: true,
-            },
-        });
-        return newUser;
-    }));
-    // Omit the password in the response
-    const { password: _ } = user, userData = __rest(user, ["password"]);
-    return userData;
-});
-const getProfileFromDB = (user) => __awaiter(void 0, void 0, void 0, function* () {
-    const userProfileData = yield prisma_1.default.userProfile.findUnique({
-        where: {
-            userId: user.userId,
-        },
-        include: {
-            user: {
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    createdAt: true,
-                    updatedAt: true,
-                },
-            },
+    const userData = yield prisma_1.default.user.create({
+        data: {
+            username,
+            email,
+            password: hashedPassword,
+            name,
         },
     });
-    return userProfileData;
+    // Omit the password in the response
+    const accessToken = jwtHelpers_1.jwtHelpers.generateToken({
+        email: userData.email,
+        role: userData.role,
+        userId: userData.id,
+        userName: userData.name,
+    }, config_1.default.jwt.jwt_secret, config_1.default.jwt.expires_in);
+    const { password: _ } = userData, user = __rest(userData, ["password"]);
+    const responsesData = {
+        id: user.id,
+        name: user.name,
+        username: user.username,
+        role: userData.role,
+        email: user.email,
+        accessToken,
+    };
+    return responsesData;
+});
+const getProfileFromDB = (user) => __awaiter(void 0, void 0, void 0, function* () {
+    const userProfileData = yield prisma_1.default.user.findUniqueOrThrow({
+        where: {
+            id: user.userId,
+        },
+    });
+    const { password: _ } = userProfileData, userData = __rest(userProfileData, ["password"]);
+    return userData;
+});
+const getAllUsersFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    const users = yield prisma_1.default.user.findMany({
+        select: {
+            id: true,
+            username: true,
+            name: true,
+            email: true,
+            status: true,
+        },
+    });
+    return users;
 });
 const UpdateProfileFromDB = (user, params) => __awaiter(void 0, void 0, void 0, function* () {
-    const { bio, age } = params;
-    const updatedProfile = yield prisma_1.default.userProfile.update({
+    const { name, email, username, status } = params;
+    const updatedProfile = yield prisma_1.default.user.update({
         where: {
-            userId: user.userId,
+            id: user.userId,
         },
         data: {
-            bio,
-            age,
+            name,
+            email,
+            username,
+            status,
         },
-        include: {
-            user: {
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
-                    createdAt: true,
-                    updatedAt: true,
-                },
-            },
+    });
+    return updatedProfile;
+});
+const UpdateStatusFromDB = (userId, status) => __awaiter(void 0, void 0, void 0, function* () {
+    const updatedProfile = yield prisma_1.default.user.update({
+        where: {
+            id: userId,
+        },
+        data: {
+            status,
         },
     });
     return updatedProfile;
@@ -124,4 +145,7 @@ exports.userService = {
     createUserIntoBD,
     getProfileFromDB,
     UpdateProfileFromDB,
+    getAllUsersFromDB,
+    UpdateStatusFromDB,
 };
+//end

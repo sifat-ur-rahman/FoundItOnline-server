@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const user_routes_1 = require("../modules/User/user.routes");
 const auth_routes_1 = require("../modules/Auth/auth.routes");
-const category_routes_1 = require("../modules/Category/category.routes");
+const lostItem_routes_1 = require("../modules/LostItem/lostItem.routes");
 const foundItem_routes_1 = require("../modules/FoundItem/foundItem.routes");
 const claim_routes_1 = require("../modules/Claim/claim.routes");
 const router = express_1.default.Router();
@@ -17,7 +17,7 @@ const moduleRoutes = [
     },
     {
         path: "/",
-        route: category_routes_1.CategoryRoutes,
+        route: lostItem_routes_1.LostItemRoutes,
     },
     {
         path: "/",
